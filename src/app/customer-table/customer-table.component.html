@@ -1,0 +1,46 @@
+<ng-container *ngIf="show != 'customers'">
+    <button (click)="show = 'customers'; customerId = 0" class="ui yellow button">
+        <i class="left arrow icon"></i> Zurück zur Kundenliste
+      </button> <br/><br/><br/>
+
+</ng-container>
+<ng-container *ngIf="show == 'customers'">
+  <h1>Alle Kunden</h1>
+  <ng-container *ngIf="(customers$ | async) as customers; else loading">
+    <table class="ui celled padded table">
+      <tr>
+        <th class="single line">Name</th>
+        <th>Kunden-Nr.</th>
+        <th>IBAN</th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <tr *ngFor="let customer of customers.data">
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.iban }}</td>
+        <td>
+          <button (click)="show = 'projects'; customerId = customer.id" class="ui lightgrey button">
+            Projekte<i class="right arrow icon"></i>
+          </button>
+        </td>
+        <td>
+          <button (click)="show = 'address'; customerId = customer.id; customerName = customer.name" class="ui lightgrey button">
+            Adresse<i class="right arrow icon"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <p *ngIf="!customers.data.length">Es wurden noch keine Kunden eingetragen.</p>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="show == 'projects'"> <app-projects [customerId]="customerId"></app-projects> </ng-container>
+
+<ng-container *ngIf="show == 'address'"> <app-address [customerId]="customerId" [customerName]="customerName"></app-address> </ng-container>
+
+<ng-template #loading>
+  <div class="ui active dimmer"><div class="ui large text loader">Daten werden geladen...</div></div>
+</ng-template>

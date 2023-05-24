@@ -1,0 +1,18 @@
+<form class="ui form"
+[formGroup]="customerForm"
+    (ngSubmit)="submitForm()">
+    <h1>Neuen Kunden anlegen</h1>
+
+    <label>Name</label>
+    <input formControlName="name">
+
+    <label>IBAN</label>
+    <input formControlName="iban">
+    
+    <p></p>
+
+    <button class="ui button" type="submit"
+        [disabled]="customerForm.invalid">
+        Speichern
+    </button>
+</form>

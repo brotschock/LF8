@@ -1,0 +1,10 @@
+<h1>Adresse von Kunde {{ customerId }}</h1>
+<ng-container *ngIf="(address$ | async) as address; else loading">
+  <p>{{customerName}}</p>
+  <p>Zum Wummshammer 27</p>
+  <p>09999 Schruhmtaun</p>
+</ng-container>
+
+<ng-template #loading>
+  <div class="ui active dimmer"><div class="ui large text loader">Daten werden geladen...</div></div>
+</ng-template>
