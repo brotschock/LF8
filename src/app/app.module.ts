@@ -14,6 +14,7 @@ import { VertriebComponent } from "./vertrieb/vertrieb.component";
 import { ProjectsComponent } from './projects/projects.component';
 import { AddressComponent } from './address/address.component';
 import { CustomerTableComponent } from './customer-table/customer-table.component';
+import { StringtestComponent } from './stringtest/stringtest.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CustomerTableComponent } from './customer-table/customer-table.componen
     ProjectsComponent,
     AddressComponent,
     CustomerTableComponent,
+    StringtestComponent,
   ],
   imports: [
     BrowserModule,

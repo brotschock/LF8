@@ -9,21 +9,20 @@ import { ProjectList } from "./project";
   providedIn: "root"
 })
 export class CustomerService {
+
+  url : string = "localhost:8080";
+
   constructor(private http: HttpClient) {}
 
   getCustomers(): Observable<CustomerList> {
-    return new Observable(observer => {
-      setTimeout(() => {
-        observer.next({
-          data: [
-            { name: "Ai Wai Fai", id: 2345, iban: "DE263984269846" },
-            { name: "Erwins Schneckenhaus", id: 4, iban: "DE99999999999" }
-          ]
-        });
-        observer.complete();
-      }, 600);
-    });
+    return this.http.get<CustomerList>(this.url + "/customers");
   }
+
+  getTestString(): Observable<String> {
+    return this.http.get<String>(this.url + "/customers");
+  }
+  
+  
 
   getProjectsForId(id:number): Observable<ProjectList> {
     if (id == 2345) {
