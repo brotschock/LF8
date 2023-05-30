@@ -2,15 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Address } from "./address";
-import { CustomerList } from "./customer";
+import { Customer, CustomerList } from "./customer";
 import { ProjectList } from "./project";
 
 @Injectable({
   providedIn: "root"
 })
 export class CustomerService {
-
-  url : string = "localhost:8080";
+  url: string = "http://localhost:8080";
 
   constructor(private http: HttpClient) {}
 
@@ -18,50 +17,40 @@ export class CustomerService {
     return this.http.get<CustomerList>(this.url + "/customers");
   }
 
-  getTestString(): Observable<String> {
-    return this.http.get<String>(this.url + "/customers");
-  }
-  
-  
-
-  getProjectsForId(id:number): Observable<ProjectList> {
+  getProjectsForId(id: number): Observable<ProjectList> {
     if (id == 2345) {
-    return new Observable(observer => {
-      setTimeout(() => {
-        observer.next({
-          data: [
-            { name: "Stullen schmieren", id: 99, timespan: "Juli 2023 - Dezember 2023", budget: 120000, customerId: 2345 }
-          ]
-        });
-        observer.complete();
-      }, 600);
-    });
-  } else if (id == 4) { 
-    return new Observable(observer => {
-      setTimeout(() => {
-        observer.next({
-          data: [
-            { name: "Tisch abwischen", id: 22, timespan: "Januar 2023 - August 2023", budget: 3000000, customerId: 4 }
-          ]
-        });
-        observer.complete();
-      }, 600);
-    })
-
-  } else {
-    return new Observable(observer => {
-      setTimeout(() => {
-        observer.next({
-          data: [
-            { name: "Stullen schmieren", id: 99, timespan: "Juli 2023 - Dezember 2023", budget: 120000, customerId: 2345 },
-            { name: "Tisch abwischen", id: 22, timespan: "Januar 2023 - August 2023", budget: 3000000, customerId: 4 }
-
-          ]
-        });
-        observer.complete();
-      }, 600);
-    })}
-
+      return new Observable(observer => {
+        setTimeout(() => {
+          observer.next({
+            data: [
+              { name: "Stullen schmieren", id: 99, timespan: "Juli 2023 - Dezember 2023", budget: 120000, customerId: 2345 }
+            ]
+          });
+          observer.complete();
+        }, 600);
+      });
+    } else if (id == 4) {
+      return new Observable(observer => {
+        setTimeout(() => {
+          observer.next({
+            data: [{ name: "Tisch abwischen", id: 22, timespan: "Januar 2023 - August 2023", budget: 3000000, customerId: 4 }]
+          });
+          observer.complete();
+        }, 600);
+      });
+    } else {
+      return new Observable(observer => {
+        setTimeout(() => {
+          observer.next({
+            data: [
+              { name: "Stullen schmieren", id: 99, timespan: "Juli 2023 - Dezember 2023", budget: 120000, customerId: 2345 },
+              { name: "Tisch abwischen", id: 22, timespan: "Januar 2023 - August 2023", budget: 3000000, customerId: 4 }
+            ]
+          });
+          observer.complete();
+        }, 600);
+      });
+    }
   }
 
   getAddress(customerId: number): Observable<Address> {
