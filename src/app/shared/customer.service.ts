@@ -9,7 +9,7 @@ import { ProjectList } from "./project";
   providedIn: "root"
 })
 export class CustomerService {
-  url: string = "http://localhost:8080";
+  url: string = "http://127.0.0.1:8080";
 
   constructor(private http: HttpClient) {}
 
