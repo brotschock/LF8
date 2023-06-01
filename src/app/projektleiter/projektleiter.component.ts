@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { Customer, CustomerList } from "../shared/customer";
+import { CustomerList } from "../shared/customer";
 import { CustomerService } from "../shared/customer.service";
 
 @Component({
@@ -9,12 +9,12 @@ import { CustomerService } from "../shared/customer.service";
   styleUrls: ["./projektleiter.component.css"]
 })
 export class ProjektleiterComponent implements OnInit {
- show = 'buttons';
+  show = "buttons";
   customers$?: Observable<CustomerList>;
 
   constructor(private cs: CustomerService) {}
 
   ngOnInit(): void {
-    this.customers$ = this.cs.getCustomers();
+    this.customers$ = this.cs.getAllCustomers();
   }
 }

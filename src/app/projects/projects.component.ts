@@ -17,8 +17,10 @@ export class ProjectsComponent {
   ngOnInit(): void {
     if (this.customerId) {
       this.heading = "Projekte für Kunde " + this.customerId;
+      this.projects$ = this.cs.getProjectsByCustomerId(this.customerId);
+    } else {
+      this.projects$ = this.cs.getAllProjects();
     }
-    this.projects$ = this.cs.getProjectsForId(this.customerId);
   }
 
 }
