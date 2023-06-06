@@ -1,36 +1,53 @@
-<div>
+<div *ngIf="auth == false">
+  <form class="ui form" [formGroup]="authForm" (ngSubmit)="checkPassword()">
+    <h1>Bitte Passwort für Projektleiter eingeben</h1>
+
+    <label>Passwort:</label> <input formControlName="password" /> <br /><br />
+    <div *ngIf="wrong">
+      <p style="color:red; font-weight: bold">Falsches Passwort, bitte versuchen Sie es erneut!</p>
+      <br />
+    </div>
+
+    <button class="ui red button" type="submit" [disabled]="authForm.invalid">Senden</button>
+  </form>
+</div>
+
+<div *ngIf="auth">
   <ng-container *ngIf="show == 'buttons'">
-    
+    <br /><br />
+
     <div>
-      <button (click)="show = 'customers'" class="ui yellow button">Alle Kunden anzeigen <i class="right arrow icon"></i></button>
+      <button (click)="show = 'customers'" class="ui yellow button">
+        Alle Kunden anzeigen <i class="right arrow icon"></i>
+      </button>
     </div>
     <br />
     <div>
-      <button (click)="show = 'projects'" class="ui green button">Alle Projekte anzeigen <i class="right arrow icon"></i></button>
+      <button (click)="show = 'projects'" class="ui green button">
+        Alle Projekte anzeigen <i class="right arrow icon"></i>
+      </button>
     </div>
     <br />
     <div>
       <button (click)="show = 'form'" class="ui blue button">Neuen Kunden anlegen <i class="right arrow icon"></i></button>
-  </div>
-  <br /><br /><br />
-</ng-container>
+    </div>
+    <br /><br /><br />
+  </ng-container>
 
-<ng-container *ngIf="show != 'buttons'">
-  <div>
-    <button (click)="show = 'buttons'" class="ui red button"><i class="left arrow icon"></i>Start</button>
-  </div>
-  <br />
+  <ng-container *ngIf="show != 'buttons'">
+    <div>
+      <button (click)="show = 'buttons'" class="ui red button"><i class="left arrow icon"></i>Start</button>
+    </div>
+    <br />
 
-  
+    <ng-container *ngIf="show == 'customers'"> <app-customer-table></app-customer-table> </ng-container>
 
-  <ng-container *ngIf="show == 'customers'"> <app-customer-table></app-customer-table> </ng-container>
-  
-  <ng-container *ngIf="show == 'projects'"> <app-projects></app-projects> </ng-container>
-  
-  <ng-container *ngIf="show == 'form'"> <app-new-customer-form></app-new-customer-form> </ng-container>
-  
-  <ng-template #loading>
-    <div class="ui active dimmer"><div class="ui large text loader">Daten werden geladen...</div></div>
-  </ng-template>
-</ng-container>
+    <ng-container *ngIf="show == 'projects'"> <app-projects></app-projects> </ng-container>
+
+    <ng-container *ngIf="show == 'form'"> <app-new-customer-form></app-new-customer-form> </ng-container>
+
+    <ng-template #loading>
+      <div class="ui active dimmer"><div class="ui large text loader">Daten werden geladen...</div></div>
+    </ng-template>
+  </ng-container>
 </div>
