@@ -2,7 +2,7 @@
   <form class="ui form" [formGroup]="authForm" (ngSubmit)="checkPassword()">
     <h1>Bitte Passwort für Projektleiter eingeben</h1>
 
-    <label>Passwort:</label> <input formControlName="password" /> <br /><br />
+    <label>Passwort:</label> <input formControlName="password" type="password"/> <br /><br />
     <div *ngIf="wrong">
       <p style="color:red; font-weight: bold">Falsches Passwort, bitte versuchen Sie es erneut!</p>
       <br />
